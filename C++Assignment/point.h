@@ -1,24 +1,28 @@
 #include <iostream> // Header file for input output functions
-#include <string> // Header file for string functions
-#include <cmath> // Header file for math functions
-
+#include <cmath>    // Header file for math functions
 
 class Point {
 
 private:
-    int x; // Private variable
-    int y; // Private variable
+    int x; // x-coordinate
+    int y; // y-coordinate
 
 public:
-    // All contructors
+    // Constructors
     Point();  // Default constructor
     Point(int x, int y); // Parameterized constructor
-    Point(int yyxx); 
+    Point(int yyxx);  // Conversion constructor for 4-digit integer input
 
-    // All member functions
+    // Member functions
     void setCoordinates(int x, int y); // Set the coordinates of the point
-    void distanceFromOrigin(); // Calculate the distance of the point from the origin
-    void determineQuadrant(); // Determine the quadrant of the point
+    double distanceFromOrigin() const; // Calculate and return distance from origin
+    int determineQuadrant() const;     // Determine and return the quadrant
 
+    // Operator overloading
+    bool operator>(const Point& other) const;    // Compare distance from origin with another Point
+    bool operator>(double distance) const;       // Compare distance from origin with a double
+    friend bool operator>(double distance, const Point& point);  // Compare a double with a Point's distance
 
+    double operator-(const Point& other) const;  // Calculate distance between two points
+    friend std::ostream& operator<<(std::ostream& out, const Point& point); // Overload << to display (x, y)
 };
